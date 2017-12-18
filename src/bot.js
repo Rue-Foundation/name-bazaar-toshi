@@ -69,7 +69,7 @@ function onPayment(session, message) {
 // STATES
 
 function welcome(session) {
-  sendMessage(session, `Hello Token!`)
+  sendMessage(session, `Welcome to NameBazaar!`)
 }
 
 function pong(session) {
@@ -89,15 +89,20 @@ function donate(session) {
     session.requestEth(toEth.USD(1))
   })
 }
-
 // HELPERS
 
 function sendMessage(session, message) {
   let controls = [
-    {type: 'button', label: 'Ping', value: 'ping'},
-    {type: 'button', label: 'Count', value: 'count'},
-    {type: 'button', label: 'Web', action: 'Webview::https://namebazaar.io/offerings'},
-    {type: 'button', label: 'Donate', value: 'donate'}
+    //{type: 'button', label: 'Ping', value: 'ping'},
+    //{type: 'button', label: 'Count', value: 'count'},
+      {type: 'group', label: 'Menu', controls: [
+          {type: 'button', label: 'Offerings', action: 'Webview::https://namebazaar.io/offerings'},
+          {type: 'button', label: 'Create Offering', action: 'Webview::https://namebazaar.io/offerings/create'},
+          {type: 'button', label: 'My Offerings', action: 'Webview::https://namebazaar.io/my-offerings'},
+          {type: 'button', label: 'My Bids', action: 'Webview::https://namebazaar.io/my-bids'}
+      ]},
+    {type: 'button', label: 'Bazaar!', action: 'Webview::https://namebazaar.io'}
+    //{type: 'button', label: 'Donate', value: 'donate'}
   ]
   session.reply(SOFA.Message({
     body: message,
